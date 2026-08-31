@@ -332,7 +332,7 @@ let characterData = [];
 let worldbookData = [];
 let editingApiId = null;
 
-// IndexedDB / LocalStorage for permanent mobile storage
+// LocalStorage for permanent mobile storage
 const storage = {
   get: (key) => {
     try { return JSON.parse(localStorage.getItem(key) || '[]'); } catch(e) { return []; }
