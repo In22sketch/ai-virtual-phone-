@@ -472,7 +472,9 @@ const MARKDOWN_COMPONENTS = {
     prologue: ({ node, ...props }: any) => <div className="rm-prologue" {...props} />,
     profile: ({ node, ...props }: any) => <div className="rm-profile" {...props} />,
     branches: ({ node, ...props }: any) => <div className="rm-branches" {...props} />,
-    content: ({ node, ...props }: any) => <div className="rm-content" {...props} />
+    content: ({ node, ...props }: any) => <div className="rm-content" {...props} />,
+    details: ({ node, ...props }: any) => <details {...props} />,
+    summary: ({ node, ...props }: any) => <summary {...props} />
 } as any;
 
 function MarkdownTextContent({
