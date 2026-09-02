@@ -147,19 +147,21 @@ function hasOfflineHtmlPreview(text: string): boolean {
 const OfflineAssistantTextBlock = memo(function OfflineAssistantTextBlock({
     text,
     defaultExpanded,
+    onActionSelect,
 }: {
     text: string;
     defaultExpanded: boolean;
+    onActionSelect?: (text: string) => void;
 }) {
     const paragraphs = useMemo(() => splitOfflineParagraphs(text), [text]);
     if (paragraphs.length <= 1) {
-        return <BilingualTextBlock text={text} mode="markdown" defaultExpanded={defaultExpanded} htmlFrameVariant="offline" />;
+        return <BilingualTextBlock text={text} mode="markdown" defaultExpanded={defaultExpanded} htmlFrameVariant="offline" onActionSelect={onActionSelect} />;
     }
     return (
         <div className="chat-offline-paragraph-stack">
             {paragraphs.map((paragraph, index) => (
                 <div className="chat-offline-paragraph" key={`${index}-${paragraph.slice(0, 16)}`}>
-                    <BilingualTextBlock text={paragraph} mode="markdown" defaultExpanded={defaultExpanded} htmlFrameVariant="offline" />
+                    <BilingualTextBlock text={paragraph} mode="markdown" defaultExpanded={defaultExpanded} htmlFrameVariant="offline" onActionSelect={onActionSelect} />
                 </div>
             ))}
         </div>
@@ -5298,6 +5300,7 @@ export function ChatRoom({ session, onBack }: ChatRoomProps) {
                                         <OfflineAssistantTextBlock
                                             text={offlineDisplay.assistantContent}
                                             defaultExpanded={session.collapseBilingualTranslation !== false ? false : true}
+                                            onActionSelect={(text) => offlineTextInputRef.current?.appendText(text)}
                                         />
                                     </div>
                                     {turn.summary.trim() && (
